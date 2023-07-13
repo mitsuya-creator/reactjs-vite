@@ -1,35 +1,20 @@
-import { useState } from 'react'
-import reactLogo from '../assets/react.svg'
-import viteLogo from '../../public/vite.svg'
-import '../css/App.css'
+import React from "react";
+import reducer from "../utils/reducer";
+import { useReducer, useState } from "react";
+import FormAddTask from "../components/view/addTask";
+import Tasks from "../components/view/tasks";
+import "../css/App.css"
 
-function App() {
-  const [count, setCount] = useState(0)
+const initialState = [];
 
+export default function App() {
+  const [tasks, dispatch] = useReducer(reducer, initialState);
+  const [text, setText] = useState("");
+  console.log(tasks)
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <FormAddTask text={text} setText={setText} dispatch={dispatch} />
+      <Tasks tasks={tasks} dispatch={dispatch} />
     </>
   )
 }
-
-export default App
