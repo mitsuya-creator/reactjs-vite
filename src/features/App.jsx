@@ -16,7 +16,7 @@ export default function App() {
       <TaksContext.Provider value={tasks}>
         <ReducerContext.Provider value={dispatch}>
           <FormAddTask />
-          {/* <Tasks /> */}
+          <Tasks />
         </ReducerContext.Provider>
       </TaksContext.Provider>
     </>

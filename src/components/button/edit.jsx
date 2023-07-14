@@ -1,10 +1,10 @@
 import SaveBtn from "./save";
 
-export default function EditBtn({ task, setIsEdit, isEdit }) {
+
+export default function EditBtn({ task }) {
     return (
         <>
-
-            {isEdit ? <SaveBtn setIsEdit={setIsEdit} task={task} /> : <button type="button" onClick={() => setIsEdit(true)}>Edit</button>}
+            {isEdit ? <SaveBtn task={task} setIsEdit={setIsEdit} /> : <button type="button" onClick={() => setIsEdit(true)}>Edit</button>}
         </>
     )
 }

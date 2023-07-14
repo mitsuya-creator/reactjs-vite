@@ -5,8 +5,8 @@ export default function reducer(state, action) {
         }
         case "changed": {
             return state.map(t => {
-                if (t.id === action.state.id) {
-                    return action.state
+                if (t.id === action.task.id) {
+                    return action.task
                 } else {
                     return t;
                 }

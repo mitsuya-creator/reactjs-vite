@@ -1,4 +1,4 @@
-export default function SaveBtn({ setIsEdit, task }) {
+export default function SaveBtn({ task, setIsEdit }) {
     return (
         <>
             <input type="text" value={task.name} />
