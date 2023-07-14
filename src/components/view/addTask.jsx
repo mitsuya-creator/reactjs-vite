@@ -1,6 +1,7 @@
 import AddButton from "../button/add"
-
-export default function FormAddTask({ text, setText, dispatch }) {
+import { useState } from "react"
+export default function FormAddTask() {
+    const [text, setText] = useState("");
     return (
         <>
             <input
@@ -9,7 +10,7 @@ export default function FormAddTask({ text, setText, dispatch }) {
                 placeholder="Add Task"
                 onChange={e => setText(e.target.value)}
             />
-            <AddButton dispatch={dispatch} text={text} setText={setText} />
+            <AddButton text={text} setText={setText} />
         </>
     )
 }

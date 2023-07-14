@@ -1,5 +1,9 @@
+import { useContext } from "react";
+import { ReducerContext } from "../../utils/taskContext";
+
 let keyID = 0;
-export default function AddButton({ dispatch, text, setText }) {
+export default function AddButton({ text, setText }) {
+    const dispatch = useContext(ReducerContext)
     return (
         <>
             <button

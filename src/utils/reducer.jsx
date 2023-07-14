@@ -3,7 +3,7 @@ export default function reducer(state, action) {
         case "added": {
             return [...state, { id: action.id, name: action.name, done: action.done }]
         }
-        case "edited": {
+        case "changed": {
             return state.map(t => {
                 if (t.id === action.state.id) {
                     return action.state
