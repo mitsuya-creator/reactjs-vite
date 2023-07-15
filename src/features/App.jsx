@@ -1,24 +1,26 @@
-import React from "react";
-import reducer from "../utils/reducer";
-import { useReducer } from "react";
-import { TaksContext, ReducerContext } from "../utils/taskContext";
-import FormAddTask from "../components/view/addTask";
-import Tasks from "../components/view/tasks";
-import "../css/App.css"
-
-const initialState = [];
+import React, { useState, useRef } from "react";
 
 export default function App() {
-  const [tasks, dispatch] = useReducer(reducer, initialState);
-  console.log(tasks)
+  const [text, setText] = useState("Creat Messages Here");
+  const [isSending, setIsSending] = useState(false);
+  let ref = useRef(null)
+  const hanldeSend = () => {
+    setIsSending(true);
+    ref.current = setTimeout(() => {
+      alert(`${text} to Mitsuya!`);
+      setIsSending(false)
+    }, 3000);
+
+  }
+  const handleUndo = () => {
+    clearTimeout(ref.current);
+    setIsSending(false);
+  }
   return (
     <>
-      <TaksContext.Provider value={tasks}>
-        <ReducerContext.Provider value={dispatch}>
-          <FormAddTask />
-          <Tasks />
-        </ReducerContext.Provider>
-      </TaksContext.Provider>
+      <input type="text" onChange={e => setText(e.target.value)} value={text} />
+      <button type="button" onClick={hanldeSend} disabled={isSending === true}>{isSending ? "...Sending" : "Send"}</button>
+      {isSending && <button type="button" onClick={handleUndo}>Undo</button>}
     </>
   )
 }
