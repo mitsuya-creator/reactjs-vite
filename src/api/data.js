@@ -1,14 +1,18 @@
-const dataSample = [
+import mitsuyaImg from '../assets/Mitsuya.jpeg';
+import hinaImg from '../assets/hina.jpg';
+import cifuyuImg from '../assets/cifuyu.jpg';
+
+export const dataSample = [
     {
         name: "Mitsuya Takashi",
-        imgUrl: "https://github.com/mitsuya-creator/reactJS/blob/main/src/assets/Mitsuya.jpeg"
+        imgUrl: mitsuyaImg,
     },
     {
         name: "Tachibana Hina",
-        imgUrl: "https://github.com/mitsuya-creator/reactJS/blob/main/src/assets/hina.jpg"
+        imgUrl: hinaImg,
     },
     {
         name: "Chifuyu Matsuno",
-        imgUrl: "https://github.com/mitsuya-creator/reactJS/blob/main/src/assets/cifuyu.jpg"
+        imgUrl: cifuyuImg,
     }
 ]

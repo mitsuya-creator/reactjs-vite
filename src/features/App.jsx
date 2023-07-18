@@ -1,9 +1,9 @@
 import React from "react";
-import InputField from "../components/view/input";
+import Frame from "../components/view/frame";
 export default function App() {
   return (
     <>
-      <InputField />
+      <Frame />
     </>
   )
 }
