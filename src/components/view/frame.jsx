@@ -11,7 +11,7 @@ export default function Frame() {
         mitsuyaBtn.current.scrollIntoView({
             behavior: 'smooth',
             block: 'nearest',
-            inline: 'end'
+            inline: 'center'
         })
     }
     const handleScrolltoCifuyu = () => {
@@ -23,7 +23,7 @@ export default function Frame() {
     }
     const handleScrolltoHina = () => {
         hinBtn.current.scrollIntoView({
-            behavior: 'auto',
+            behavior: 'smooth',
             block: 'nearest',
             inline: 'center'
         })
@@ -36,11 +36,11 @@ export default function Frame() {
                 <button onClick={handleScrolltoCifuyu}>Cifuyu</button>
                 <button onClick={handleScrolltoHina}>Hina</button>
             </nav>
-            <div>
-                <ul>
-                    <li><img src={MitusyaImg} alt="mitsuya" ref={mitsuyaBtn} /></li>
-                    <li><img src={CifuyuImg} alt="cifuyu" ref={cifuyuBtn} /></li>
-                    <li><img src={HinaImg} alt="hina" ref={hinBtn} /></li>
+            <div style={{ width: 500, height: 300, overflow: 'hidden' }}>
+                <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <li ><img src={MitusyaImg} alt="mitsuya" ref={mitsuyaBtn} width={200} /></li>
+                    <li ><img src={CifuyuImg} alt="cifuyu" ref={cifuyuBtn} width={350} height={200} /></li>
+                    <li ><img src={HinaImg} alt="hina" ref={hinBtn} width={200} /></li>
                 </ul>
             </div>
         </>
