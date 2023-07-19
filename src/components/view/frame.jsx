@@ -3,46 +3,61 @@ import MitusyaImg from "../../assets/Mitsuya.jpeg";
 import CifuyuImg from "../../assets/cifuyu.jpg";
 import HinaImg from "../../assets/hina.jpg";
 export default function Frame() {
-    const mitsuyaBtn = useRef(null);
-    const cifuyuBtn = useRef(null);
-    const hinBtn = useRef(null);
+    const itemsRef = useRef(null);
 
-    const handleScrolltoMitsuya = () => {
-        mitsuyaBtn.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
-        })
-    }
-    const handleScrolltoCifuyu = () => {
-        cifuyuBtn.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
-        })
-    }
-    const handleScrolltoHina = () => {
-        hinBtn.current.scrollIntoView({
+    const scrollToId = itemId => {
+        const map = getMap();
+        const node = map.get(itemId);
+        node.scrollIntoView({
             behavior: 'smooth',
             block: 'nearest',
             inline: 'center'
         })
     }
 
+    function getMap() {
+        if (!itemsRef.current) {
+            itemsRef.current = new Map();
+        }
+        return itemsRef.current;
+    }
     return (
         <>
             <nav>
-                <button onClick={handleScrolltoMitsuya}>Mitsuya</button>
-                <button onClick={handleScrolltoCifuyu}>Cifuyu</button>
-                <button onClick={handleScrolltoHina}>Hina</button>
+                <button type="button" onClick={() => scrollToId(0)} >Mitsuya</button>
+                <button type="button" onClick={() => scrollToId(4)} >Cifuyu</button>
+                <button type="button" onClick={() => scrollToId(8)} >Hina</button>
             </nav>
-            <div style={{ width: 500, height: 300, overflow: 'hidden' }}>
-                <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <li ><img src={MitusyaImg} alt="mitsuya" ref={mitsuyaBtn} width={200} style={{ margin: 10 }} /></li>
-                    <li ><img src={CifuyuImg} alt="cifuyu" ref={cifuyuBtn} width={350} height={200} style={{ margin: 10 }} /></li>
-                    <li ><img src={HinaImg} alt="hina" ref={hinBtn} width={200} style={{ margin: 10 }} /></li>
+            <div style={{ width: 660, overflow: 'hidden' }}>
+                <ul style={{ justifyContent: 'justify-content-center', display: 'flex' }}>
+                    {listImg.map(img => <li key={img.id} ref={node => {
+                        const map = getMap();
+                        console.log(node)
+                        if (node) {
+                            map.set(img.id, node)
+                        } else {
+                            map.delete(img.id)
+                        }
+                    }}><img src={img.imgUrl} alt={img.imgUrl} width={200} style={{ margin: 10 }} /></li>)}
                 </ul>
             </div>
         </>
     )
 }
+
+const listImg = [];
+let i, url;
+for (i = 0; i < 9; i++) {
+    if (i < 3) {
+        url = MitusyaImg
+    } else if (i > 2 && i < 6) {
+        url = CifuyuImg
+    } else {
+        url = HinaImg
+    }
+    listImg.push({
+        id: i,
+        imgUrl: url
+    })
+}
+console.log(listImg);
