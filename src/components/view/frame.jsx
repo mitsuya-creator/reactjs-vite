@@ -35,8 +35,6 @@ export default function Frame() {
                         console.log(node)
                         if (node) {
                             map.set(img.id, node)
-                        } else {
-                            map.delete(img.id)
                         }
                     }}><img src={img.imgUrl} alt={img.imgUrl} width={200} style={{ margin: 10 }} /></li>)}
                 </ul>
