@@ -38,9 +38,9 @@ export default function Frame() {
             </nav>
             <div style={{ width: 500, height: 300, overflow: 'hidden' }}>
                 <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <li ><img src={MitusyaImg} alt="mitsuya" ref={mitsuyaBtn} width={200} /></li>
-                    <li ><img src={CifuyuImg} alt="cifuyu" ref={cifuyuBtn} width={350} height={200} /></li>
-                    <li ><img src={HinaImg} alt="hina" ref={hinBtn} width={200} /></li>
+                    <li ><img src={MitusyaImg} alt="mitsuya" ref={mitsuyaBtn} width={200} style={{ margin: 10 }} /></li>
+                    <li ><img src={CifuyuImg} alt="cifuyu" ref={cifuyuBtn} width={350} height={200} style={{ margin: 10 }} /></li>
+                    <li ><img src={HinaImg} alt="hina" ref={hinBtn} width={200} style={{ margin: 10 }} /></li>
                 </ul>
             </div>
         </>
