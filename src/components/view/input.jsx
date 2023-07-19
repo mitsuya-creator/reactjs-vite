@@ -1,5 +1,9 @@
 import FocusBtn from "../button/focus";
-import { useRef } from "react";
+import { useRef, forwardRef } from "react";
+
+const MyInput = forwardRef((props, ref) => {
+    return <input type="text" {...props} ref={ref} />
+})
 export default function InputField() {
     const myref = useRef(null);
     const hanldeClick = () => {
@@ -8,7 +12,7 @@ export default function InputField() {
     }
     return (
         <>
-            <input ref={myref} type="input" placeholder="input here" />
+            <MyInput ref={myref} />
             <FocusBtn handler={hanldeClick} />
         </>
     )
