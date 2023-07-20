@@ -1,9 +1,9 @@
 import React from "react";
-import InputField from "../components/view/input";
+import VideoFrame from "../components/view/video";
 export default function App() {
   return (
     <>
-      <InputField />
+      <VideoFrame />
     </>
   )
 }
