@@ -1,9 +1,15 @@
-import React from "react";
-import ListIMg from "../components/view/frame2";
+import React, { useRef } from "react";
+import { InputField } from "../components/view/input2";
+import FocusBtn from "../components/button/focus2";
 export default function App() {
+  const myref = useRef(null);
+  const handleClick = () => {
+    myref.current.focus();
+  }
   return (
     <>
-      <ListIMg />
+      <InputField ref={myref} />
+      <FocusBtn handle={handleClick} />
     </>
   )
 }
