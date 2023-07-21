@@ -1,9 +1,9 @@
 import React from "react";
-import VideoApp from "../components/view/video2";
+import ViewConnection from "../components/view/connectionView";
 export default function App() {
   return (
     <>
-      <VideoApp />
+      <ViewConnection />
     </>
   )
 }
