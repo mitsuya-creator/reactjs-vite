@@ -1,9 +1,18 @@
-import React from "react";
-import ViewConnection from "../components/view/connectionView";
+import React, { useState } from "react";
+import FocusOnMount from "../components/view/myInput";
+import ShowButton from "../components/button/show";
+
+const state = {
+  text: 'Taylor',
+  checked: false
+}
 export default function App() {
+  const [show, setShow] = useState(false);
   return (
     <>
-      <ViewConnection />
+      <ShowButton handleShow={() => setShow(!show)} isShow={show} />
+      {show &&
+        <FocusOnMount initialState={state} />}
     </>
   )
 }
