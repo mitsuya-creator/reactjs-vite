@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import FocusOnMount from "../components/view/myInput";
-import ShowButton from "../components/button/show";
+import React, { useState, useEffect } from "react";
+import { fetchBio } from "../utils/apiDummy";
+import SelectPerson from "../components/view/select";
 
-const state = {
-  text: 'Taylor',
-  checked: false
-}
 export default function App() {
-  const [show, setShow] = useState(false);
+  const [person, setPerson] = useState("Mitsuya");
+  const [bio, setBio] = useState(null);
+  console.log(person)
+  useEffect(() => {
+    setBio(null);
+    let ignore = false;
+    fetchBio(person).then(response => !ignore && setBio(response));
+    return () => ignore = true;
+  }, [person])
   return (
     <>
-      <ShowButton handleShow={() => setShow(!show)} isShow={show} />
-      {show &&
-        <FocusOnMount initialState={state} />}
+      <SelectPerson setPerson={setPerson} person={person} bio={bio} />
     </>
   )
 }
