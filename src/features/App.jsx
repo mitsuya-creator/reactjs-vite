@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { db } from "../assets/data/db";
 import TaskList from "../components/view/taskList2";
 import AddButton from "../components/button/add2";
@@ -8,7 +8,10 @@ export default function App() {
   const [tasks, setTasks] = useState(db);
   const [text, setText] = useState("")
   const [activeTodos, setActiveTodos] = useState(false);
-  const leftTask = tasks.filter(task => task.completed != true)
+  const leftTask = useMemo(() => {
+    console.log(tasks);
+    return tasks.filter(task => task.completed != true);
+  }, [activeTodos, tasks])
   const result = activeTodos ? leftTask : tasks;
   return (
     <>
