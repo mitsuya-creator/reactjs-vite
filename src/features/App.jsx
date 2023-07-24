@@ -1,11 +1,27 @@
-import React, { useState, useEffect } from "react";
-import SelectPerson from "../components/view/select";
+import React, { useState } from "react";
+import { db } from "../assets/data/db";
+import TaskList from "../components/view/taskList2";
+import AddButton from "../components/button/add2";
+import "../css/App.css"
 
 export default function App() {
-
+  const [tasks, setTasks] = useState(db);
+  const [text, setText] = useState("")
+  const [activeTodos, setActiveTodos] = useState(false);
+  const leftTask = tasks.filter(task => task.completed != true)
+  const result = activeTodos ? leftTask : tasks;
   return (
     <>
-      <SelectPerson />
+      <p>
+        <input type="checkbox" checked={activeTodos} onChange={e => setActiveTodos(e.target.checked)} />
+        Show only active todos
+      </p>
+      <input type="text" value={text} placeholder="Add task here" onChange={e => setText(e.target.value)} />
+      <AddButton task={tasks} setTask={setTasks} text={text} setText={setText} />
+      <ul>
+        {result.map(task => <TaskList task={task} key={task.id} />)}
+      </ul>
+      <span>{leftTask.length} todos left</span>
     </>
   )
 }
