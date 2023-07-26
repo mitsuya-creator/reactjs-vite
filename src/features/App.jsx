@@ -1,17 +1,23 @@
 import React, { useState } from "react";
-import { dataSample } from "../api/data";
-import SelectedContact from "../components/button/selectedContact";
-import DetailsContact from "../components/view/detailsContact";
-import "../css/App.css";
+import InputField from "../components/view/input3";
+import OpenChat from "../components/button/openChat";
 
 export default function App() {
-  const [selected, setSelected] = useState(0);
-  const [data, setData] = useState(dataSample)
+  const [show, setShow] = useState(false);
+  const [text, setText] = useState("")
   return (
     <>
-      {data.map(contact => <SelectedContact key={contact.id} contact={contact} selected={selected} setSelected={setSelected} />)}
-      <hr />
-      {data.map(contact => contact.id === selected ? <DetailsContact contact={contact} key={contact.id} data={data} setData={setData} /> : null)}
+      {show ? <OpenChat openToChat={(e) => {
+        e.preventDefault();
+        setShow(!show)
+      }} /> :
+        <InputField text={text} setText={setText} send={(e) => {
+          e.preventDefault();
+          setShow(!show);
+          setText("");
+          console.log(`sending....${text}`)
+        }} />
+      }
     </>
   )
 }
