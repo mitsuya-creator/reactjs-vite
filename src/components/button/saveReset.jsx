@@ -1,8 +1,8 @@
-export default function SaveReset() {
+export default function SaveReset({ onSave, onReset }) {
     return (
         <>
-            <button type="button">Save</button>
-            <button type="button">Reset</button>
+            <button type="button" onClick={onSave}>Save</button>
+            <button type="button" onClick={onReset}>Reset</button>
         </>
     )
 }

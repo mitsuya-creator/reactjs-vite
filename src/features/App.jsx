@@ -6,12 +6,12 @@ import "../css/App.css";
 
 export default function App() {
   const [selected, setSelected] = useState(0);
+  const [data, setData] = useState(dataSample)
   return (
     <>
-      {dataSample.map(contact => <SelectedContact key={contact.id} contact={contact} selected={selected} setSelected={setSelected} />
-      )}
+      {data.map(contact => <SelectedContact key={contact.id} contact={contact} selected={selected} setSelected={setSelected} />)}
       <hr />
-      {dataSample.map(contact => contact.id === selected ? <DetailsContact contact={contact} key={contact.id} /> : null)}
+      {data.map(contact => contact.id === selected ? <DetailsContact contact={contact} key={contact.id} data={data} setData={setData} /> : null)}
     </>
   )
 }
