@@ -1,23 +1,41 @@
-import React, { useState } from "react";
-import InputField from "../components/view/input3";
-import OpenChat from "../components/button/openChat";
+import React, { useState, useEffect } from "react";
 
 export default function App() {
-  const [show, setShow] = useState(false);
-  const [text, setText] = useState("")
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [canMove, setCanMove] = useState(false);
+
+  useEffect(() => {
+    function handleMove(e) {
+      setPosition({ x: e.clientX, y: e.clientY });
+    }
+    console.log(canMove)
+    canMove && window.addEventListener('mousemove', handleMove);
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, [canMove])
+
   return (
     <>
-      {show ? <OpenChat openToChat={(e) => {
-        e.preventDefault();
-        setShow(!show)
-      }} /> :
-        <InputField text={text} setText={setText} send={(e) => {
-          e.preventDefault();
-          setShow(!show);
-          setText("");
-          console.log(`sending....${text}`)
-        }} />
-      }
+      <label>
+        <input type="checkbox"
+          checked={canMove}
+          onChange={e => setCanMove(e.target.checked)}
+        />
+        The dot is allowed to move
+      </label>
+      <hr />
+      <div style={{
+        position: 'absolute',
+        backgroundColor: 'pink',
+        borderRadius: '50%',
+        opacity: 0.6,
+        transform: `translate(${position.x}px, ${position.y}px)`,
+        pointerEvents: 'none',
+        left: -20,
+        top: -20,
+        width: 40,
+        height: 40,
+      }} />
     </>
   )
+
 }
