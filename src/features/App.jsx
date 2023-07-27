@@ -1,41 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import ChatRoom from "../components/view/chatRooms";
 
 export default function App() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [canMove, setCanMove] = useState(false);
-
-  useEffect(() => {
-    function handleMove(e) {
-      setPosition({ x: e.clientX, y: e.clientY });
-    }
-    console.log(canMove)
-    canMove && window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
-  }, [canMove])
+  const [roomId, setRoomId] = useState('general');
+  const [encryption, setEncryption] = useState(false);
 
   return (
     <>
       <label>
-        <input type="checkbox"
-          checked={canMove}
-          onChange={e => setCanMove(e.target.checked)}
-        />
-        The dot is allowed to move
+        choose the chat room {''}
+        <select value={roomId} onChange={e => setRoomId(e.target.value)}>
+          <option value="general">general</option>
+          <option value="game">game</option>
+          <option value="travel">travel</option>
+        </select>
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" checked={encryption} onChange={e => setEncryption(e.target.checked)} />
+        Enable encryption
       </label>
       <hr />
-      <div style={{
-        position: 'absolute',
-        backgroundColor: 'pink',
-        borderRadius: '50%',
-        opacity: 0.6,
-        transform: `translate(${position.x}px, ${position.y}px)`,
-        pointerEvents: 'none',
-        left: -20,
-        top: -20,
-        width: 40,
-        height: 40,
-      }} />
+      <ChatRoom encryp={encryption} roomId={roomId} />
     </>
   )
-
 }
