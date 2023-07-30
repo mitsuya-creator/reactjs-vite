@@ -1,17 +1,26 @@
-import React, { useState } from "react";;
-import { toast } from "react-toastify";
-import ShowNotification from "../components/view/notification";
+import React, { useState } from "react";
+import ChatRoom from "../components/view/chatRoom2";
 
 export default function App() {
-  const [show, setShow] = useState(false);
+  const [roomId, setRoomId] = useState("general");
+  const [isDark, setIsDark] = useState(true);
+
   return (
     <>
-      <button type="button" onClick={() => {
-        toast.success("easy");
-        setShow(!show);
-      }}>Notify</button>
-      {show && <ShowNotification />}
-
+      <label>
+        Choose the chat room:
+        <select value={roomId} onChange={e => setRoomId(e.target.value)}>
+          <option value={"general"}>general</option>
+          <option value={"travel"}>travel</option>
+          <option value={"music"}>music</option>
+        </select>
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" checked={isDark} onChange={e => setIsDark(e.target.checked)} /> use dark theme
+      </label>
+      <hr />
+      <ChatRoom roomId={roomId} />
     </>
   )
 }
