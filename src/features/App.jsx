@@ -20,7 +20,7 @@ export default function App() {
         <input type="checkbox" checked={isDark} onChange={e => setIsDark(e.target.checked)} /> use dark theme
       </label>
       <hr />
-      <ChatRoom roomId={roomId} />
+      <ChatRoom roomId={roomId} isDark={isDark} />
     </>
   )
 }

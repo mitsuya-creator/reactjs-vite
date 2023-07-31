@@ -1,20 +1,24 @@
-import React, { experimental_useEffectEvent as useEffectEvent } from "react"
-import ShowNotification from "./notification"
-import { useEffect } from "react"
-import { creatConnection } from "../../utils/chat2"
+import React, { experimental_useEffectEvent as useEffectEvent } from "react";
+import ShowNotification from "./notification";
+import { useEffect, useState } from "react";
+import { creatConnection } from "../../utils/chat2";
 
-export default function ChatRoom({ roomId, theme }) {
-    const onConnected = useEffectEvent(() => {
-        ShowNotification("welcome to ", roomId, theme)
-    })
+export default function ChatRoom({ roomId, isDark }) {
+    const [show, setShow] = useState(false)
+    const onConnected = useEffectEvent(() => setShow(true))
     useEffect(() => {
-        const connection = creatConnection(serverUrl, roomId);
+        const connection = creatConnection('http://localhost:', roomId);
         connection.on("connected", () => {
-            setTimeout(() => onConnected(), 2000);
+            setTimeout(() => onConnected(), 1000);
         });
         connection.connect();
         return () => connection.disconnect()
     }, [roomId]);
 
-    return <h1>Welcom to {roomId} room !</h1>
+    return (
+        <>
+            <h1>Welcome to {roomId} room !</h1>
+            {show && <ShowNotification msg={'welcome to '} roomId={roomId} isDark={isDark} />}
+        </>
+    )
 }

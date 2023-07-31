@@ -5,6 +5,7 @@ export function creatConnection(serverUrl, roomId) {
             timeout = setTimeout(() => {
                 if (connectedCallback) connectedCallback();
             }, 100)
+            console.log(`connected to ${roomId}`);
         },
         on(event, callback) {
             if (connectedCallback) throw Error('cannot add the handler twice!');
@@ -12,6 +13,7 @@ export function creatConnection(serverUrl, roomId) {
             connectedCallback = callback;
         },
         disconnect() {
+            console.log(`disconnected from ${roomId}`)
             clearTimeout(timeout);
         }
 
