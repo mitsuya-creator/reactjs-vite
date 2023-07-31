@@ -9,8 +9,8 @@ export function creatConnection(serverUrl, roomId) {
         },
         on(event, callback) {
             if (connectedCallback) throw Error('cannot add the handler twice!');
-            if (event !== 'connected') throw Error('only connected event is supported');
-            connectedCallback = callback;
+            else if (event !== 'connected') throw Error('only connected event is supported');
+            else connectedCallback = callback;
         },
         disconnect() {
             console.log(`disconnected from ${roomId}`)
