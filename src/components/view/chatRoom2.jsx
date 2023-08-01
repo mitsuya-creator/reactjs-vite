@@ -1,5 +1,5 @@
 import React, { experimental_useEffectEvent as useEffectEvent } from "react";
-import { showNotification } from "./notification"
+import { showNotification } from "../../utils/notification"
 import { useEffect } from "react";
 import { creatConnection } from "../../utils/chat2";
 
