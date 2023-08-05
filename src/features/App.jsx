@@ -1,23 +1,24 @@
 import React, { useState } from "react";
-import "../css/App.css";
-import ChatRoom from "../components/view/chatRoom3";
 
 export default function App() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  const [isEncrypted, setIsEncrypted] = useState(false);
   const [roomId, setRoomId] = useState("general");
-  const [serverUrl, setServerUrl] = useState("localhost:345");
 
   return (
-    <div className={isDark ? "black" : "light"}>
-      <button type="button" onClick={() => setIsDark(!isDark)}>Toggle Theme</button>
-      <br />
+    <>
       <label>
-        Server Url :
-        <input type="text" value={serverUrl} onChange={e => setServerUrl(e.target.value)} />
+        <input type="checkbox" checked={isDark} onChange={e => setIsDark(e.target.checked)} />
+        Use dark theme
       </label>
       <br />
       <label>
-        choose the chat room :
+        <input type="checkbox" checked={isEncrypted} onChange={e => setIsEncrypted(e.target.checked)} />
+        Enable encryption
+      </label>
+      <br />
+      <label>
+        Choose the chat room :
         <select value={roomId} onChange={e => setRoomId(e.target.value)}>
           <option value="general">general</option>
           <option value="music">music</option>
@@ -25,7 +26,6 @@ export default function App() {
         </select>
       </label>
       <hr />
-      <ChatRoom serverUrl={serverUrl} roomId={roomId} />
-    </div>
+    </>
   )
 }
