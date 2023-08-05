@@ -1,18 +1,19 @@
-import React, {useState,useEffect,useRef} from "react";
-import {experimental_useEffectEvent as useEffectEvent} from "react";
-import {FadeInAnimation} from "../utils/animation";
+import React, { useState, useEffect, useRef } from "react";
+import { experimental_useEffectEvent as useEffectEvent } from "react";
+import { FadeInAnimation } from "../utils/animation";
 
 function Welcome({ duration }) {
   const ref = useRef(null);
 
+  const onAppear = useEffectEvent(animation => animation.start(duration));
+
   useEffect(() => {
     const animation = new FadeInAnimation(ref.current);
-    animation.start(duration);
+    onAppear(animation);
     return () => {
       animation.stop();
     };
-  }, [duration]);
-
+  }, []);
   return (
     <h1
       ref={ref}
@@ -22,7 +23,7 @@ function Welcome({ duration }) {
         padding: 50,
         textAlign: 'center',
         fontSize: 50,
-        backgroundImage: 'salmon'
+        backgroundColor: 'salmon'
       }}
     >
       Welcome
@@ -31,9 +32,10 @@ function Welcome({ duration }) {
 }
 
 export default function App() {
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState(100);
   const [show, setShow] = useState(false);
 
+  console.log(performance.now())
   return (
     <>
       <label>
