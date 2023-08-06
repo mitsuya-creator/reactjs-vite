@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { showNotification } from "../utils/notification";
+import ChatRoom from "../components/view/chatRoom3";
 
 export default function App() {
   const [isDark, setIsDark] = useState(false);
@@ -26,6 +28,11 @@ export default function App() {
         </select>
       </label>
       <hr />
+      <ChatRoom
+        roomId={roomId}
+        isEncrypted={isEncrypted}
+        onMessage={msg => showNotification(`New Message: ${msg}`, isDark)}
+      />
     </>
   )
 }
