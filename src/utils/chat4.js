@@ -23,7 +23,7 @@ function createEncryption({ serverUrl, roomId }) {
                 throw Error("cannot add the handler twice")
             }
             if (event !== "message") {
-                throw Errorf("only 'message' event is supported")
+                throw Error("only 'message' event is supported")
             }
             callBackMessage = callback;
         },
@@ -60,7 +60,7 @@ function createUnEncryption({ serverUrl, roomId }) {
                 throw Error("cannot add the handler twice")
             }
             if (event !== "message") {
-                throw Errorf("only 'message' event is supported")
+                throw Error("only 'message' event is supported")
             }
             callBackMessage = callback;
         },
