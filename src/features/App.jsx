@@ -1,21 +1,36 @@
-import React from "react";
-import { useFormInput } from "../hooks/useFormInput";
+import React, { useState } from "react";
+import ChatRoom from "../components/view/chatRoom3";
+import { showNotification } from "../utils/notification";
 
 export default function App() {
-  const firstName = useFormInput("Mitsuya");
-  const lastName = useFormInput("Takashi");
+  const [roomId, setRoomId] = useState("general");
+  const [isEncrypted, setIsEncrypted] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
   return (
     <>
       <label>
-        First name : {""} <input {...firstName} />
+        Choose the chat room : {""}
+        <select value={roomId} onChange={e => setRoomId(e.target.value)}>
+          <option value="general">general</option>
+          <option value="travel">travel</option>
+          <option value="music">music</option>
+        </select>
+      </label>
+      <hr />
+      <label>
+        <input type="checkbox" checked={isEncrypted} onChange={e => setIsEncrypted(e.target.checked)} /> Enable Encryption
       </label>
       <br />
       <label>
-        Last name: {""} <input {...lastName} />
+        <input type="checkbox" checked={isDark} onChange={e => setIsDark(e.target.checked)} /> Enable dark mode
       </label>
-      <hr />
-      <h1>Hello {firstName.value} {lastName.value}</h1>
+      <br />
+      <ChatRoom
+        roomId={roomId}
+        isEncrypted={isEncrypted}
+        onMessage={msg => showNotification(`New message: ${msg}`, isDark)}
+      />
     </>
   )
 }
