@@ -1,23 +1,21 @@
 import React from "react";
-import { useOnlineStatus } from "../hooks/useOnline";
-
-function StatusBar() {
-  const isOnline = useOnlineStatus();
-  return <h1>{isOnline ? " Online" : "Offline"}</h1>
-}
-
-function SaveButton() {
-  const isOnline = useOnlineStatus();
-
-  return <button type="button" disabled={!isOnline} onClick={() => console.log("save progress")}>{isOnline ? "Save Progress" : "Reconnecting"}</button>
-}
-
+import { useFormInput } from "../hooks/useFormInput";
 
 export default function App() {
+  const firstName = useFormInput("Mitsuya");
+  const lastName = useFormInput("Takashi");
+
   return (
     <>
-      <SaveButton />
-      <StatusBar />
+      <label>
+        First name : {""} <input {...firstName} />
+      </label>
+      <br />
+      <label>
+        Last name: {""} <input {...lastName} />
+      </label>
+      <hr />
+      <h1>Hello {firstName.value} {lastName.value}</h1>
     </>
   )
 }
