@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useInterval } from "./useInterval";
 
 export function useCounter(initalNumber, delay) {
     const [counter, setCounter] = useState(initalNumber)
-    useEffect(() => {
-        const intervalId = setInterval(() => setCounter(c => c + 1), delay);
-        return () => clearInterval(intervalId);
-    }, [delay]);
+    useInterval(() => setCounter(c => c + 1), delay)
     return counter;
 }
