@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { usePointerPosition } from "../hooks/usePointerPosition";
+import { useDelayedValue } from "../hooks/useDelayedValue";
+import Dot from "../components/view/dot";
 
 export default function App() {
   const pos1 = usePointerPosition();
@@ -16,32 +18,5 @@ export default function App() {
       <Dot position={pos4} opacity={.4} />
       <Dot position={pos5} opacity={.2} />
     </>
-  )
-}
-
-const useDelayedValue = (value, delay) => {
-  const [delayedValue, setDelayedValue] = useState(value);
-  useEffect(() => {
-    setTimeout(() => setDelayedValue(value), delay);
-
-  }, [value, delay])
-  return delayedValue;
-}
-
-const Dot = ({ position, opacity }) => {
-  return (
-    <div style={{
-      position: "absolute",
-      backgroundColor: "pink",
-      borderRadius: "50%",
-      opacity,
-      transform: `translate(${position.x}px,${position.y}px)`,
-      pointerEvents: "none",
-      left: -20,
-      top: -20,
-      width: 40,
-      height: 40
-    }}>
-    </div>
   )
 }
