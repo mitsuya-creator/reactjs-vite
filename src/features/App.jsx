@@ -1,18 +1,47 @@
-import React from "react";
-import { useCounter } from "../hooks/useCounter";
-import { useInterval } from "../hooks/useInterval";
+import React, { useState, useEffect } from "react";
+import { usePointerPosition } from "../hooks/usePointerPosition";
 
 export default function App() {
-  const counter = useCounter(1, 1000);
-
-  useInterval(() => {
-    const randomColor = `hsla(${Math.random() * 360}, 100%, 50%, 1)`;
-    document.body.style.backgroundColor = randomColor;
-  }, 2000)
+  const pos1 = usePointerPosition();
+  const pos2 = useDelayedValue(pos1, 100);
+  const pos3 = useDelayedValue(pos2, 200);
+  const pos4 = useDelayedValue(pos3, 300);
+  const pos5 = useDelayedValue(pos4, 50);
 
   return (
     <>
-      <h1>Tick : {counter}</h1>
+      <Dot position={pos1} opacity={1} />
+      <Dot position={pos2} opacity={0.8} />
+      <Dot position={pos3} opacity={0.6} />
+      <Dot position={pos4} opacity={.4} />
+      <Dot position={pos5} opacity={.2} />
     </>
+  )
+}
+
+const useDelayedValue = (value, delay) => {
+  const [delayedValue, setDelayedValue] = useState(value);
+  useEffect(() => {
+    setTimeout(() => setDelayedValue(value), delay);
+
+  }, [value, delay])
+  return delayedValue;
+}
+
+const Dot = ({ position, opacity }) => {
+  return (
+    <div style={{
+      position: "absolute",
+      backgroundColor: "pink",
+      borderRadius: "50%",
+      opacity,
+      transform: `translate(${position.x}px,${position.y}px)`,
+      pointerEvents: "none",
+      left: -20,
+      top: -20,
+      width: 40,
+      height: 40
+    }}>
+    </div>
   )
 }
